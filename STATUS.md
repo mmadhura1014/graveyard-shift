@@ -15,6 +15,8 @@
 - 2026-11-16 Kiro CLI: steering-driven spec (requirements/design/tasks/automation-proposal), scanner + 9 detectors, CLI, seed data, web skeleton + views, moto integration tests (176 py + 46 web tests pass). Kiro free credits ran out twice; switched to a second account.
 - 2026-11-16 Manual (outside Kiro): steering files + KIRO_PROMPT.md; fixed `scripts/moto_demo_scan.py` (moto ignores OwnerIds=self, inflated count to 1309; now 8); redesigned Graveyard hero view (names/cost on stones, grid layout, cost-sorted). Verified with headless-Chrome screenshots.
 - STILL TO DO IN KIRO (needed for Kiro-usage score): enable agent hooks, MCP config (AWS Pricing/Docs), show hooks firing.
+- 2026-11-16 Kiro CLI: new spec `haunted-graveyard` (requirements, design, tasks approved step by step); implemented T1-T4 (Haunting Score, story templates, share-card data, exorcism store slice). Free credits ran out partway through T5.
+- 2026-11-16 Manual (outside Kiro): finished T5-T12 from Kiro's approved tasks.md (Séance panel, tombstone click, header score + explanation, ghosts/candles, share-card PNG, exorcism animation, About link fix, mobile row spacing). 102 web tests, build and lint pass. Checked in headless Chrome over CDP: panel focus/Escape/focus-return, vanish class (absent under reduced motion), share PNG content, no horizontal scroll at 390px. T13 (human check in a real browser) still open.
 
 ## Milestones
 - [ ] M0 Spec approved (requirements, design, tasks, automation proposal)

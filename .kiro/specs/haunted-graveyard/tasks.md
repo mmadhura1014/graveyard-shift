@@ -111,7 +111,7 @@ Each task lists **Satisfies** (requirement IDs) and **Verify** (how to confirm i
 - **Commit:** `fix(web): correct GitHub link in About`
 
 ### T12 — STATUS.md entry + final quality gate
-- [ ] T12
+- [x] T12
 - **Do:** Create/append `STATUS.md` with a "Kiro CLI" heading and a short entry recording the credits used for this spec. Run the full gate: `npx vitest run` (existing 46 + new tests), `npm run build`, `npm run lint` (oxlint). Tick all completed task boxes in `tasks.md` (except T13).
 - **Files:** `STATUS.md`, `.kiro/specs/haunted-graveyard/tasks.md`
 - **Satisfies:** AC-HG-011-2, AC-HG-011-3, AC-HG-008-1, AC-HG-008-3, AC-HG-008-4

@@ -742,3 +742,8 @@ pre { white-space: pre-wrap; word-break: break-word; }
 .share-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 .share-note { font-size: 0.8rem; color: var(--text-muted, #9a9ab8); }
 .share-error { font-size: 0.8rem; color: #ff7a7a; }
+
+/* Give floating ghosts room above stones when the grid wraps to 2 columns. */
+@media (max-width: 600px) {
+  .tombstone-field { row-gap: 4.5rem; }
+}
