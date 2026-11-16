@@ -513,3 +513,112 @@ pre { white-space: pre-wrap; word-break: break-word; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   SÉANCE PANEL — side sheet (desktop) / bottom sheet (mobile)
+   ══════════════════════════════════════════════════════════════════ */
+.seance-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 200;
+}
+.seance-panel {
+  position: fixed;
+  z-index: 210;
+  background: var(--bg-card, #161628);
+  border: 1px solid var(--border, #2a2a45);
+  border-radius: 8px 0 0 8px;
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow-y: auto;
+  /* Desktop default: right side sheet */
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 380px;
+  max-width: 90vw;
+}
+.seance-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.25rem 0.75rem;
+  border-bottom: 1px solid var(--border, #2a2a45);
+}
+.seance-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--moon, #e8e0c0);
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.seance-type {
+  font-size: 0.72rem;
+  color: var(--text-muted, #7878a0);
+  background: var(--bg-mid, #111120);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.seance-close {
+  background: none;
+  border: none;
+  color: var(--text-muted, #7878a0);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+.seance-close:hover { background: var(--bg-card-hover, #1e1e35); color: var(--text-primary, #d8d8e8); }
+.seance-story { padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.45rem; }
+.seance-line { font-size: 0.9rem; color: var(--text-primary, #d8d8e8); line-height: 1.5; margin: 0; }
+.seance-age { color: var(--moon, #e8e0c0); font-weight: 600; }
+.seance-cost { color: var(--amber, #fbbf24); }
+.seance-cause { color: var(--text-muted, #7878a0); }
+.seance-attached { color: var(--text-primary, #d8d8e8); font-style: italic; }
+.seance-flavor { color: var(--text-dim, #4a4a68); margin-top: 0.25rem; }
+.seance-footer {
+  display: flex;
+  gap: 0.6rem;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border, #2a2a45);
+  margin-top: auto;
+}
+.seance-close-btn {
+  background: var(--bg-mid, #111120);
+  border: 1px solid var(--border, #2a2a45);
+  color: var(--text-muted, #7878a0);
+  padding: 0.3rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.seance-close-btn:hover { color: var(--text-primary, #d8d8e8); border-color: var(--amber, #fbbf24); }
+
+/* Mobile: bottom sheet */
+@media (max-width: 767px) {
+  .seance-panel {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: auto;
+    max-height: 80vh;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Visible focus for all interactive elements in the panel */
+.seance-panel button:focus-visible,
+.seance-panel [tabindex]:focus-visible {
+  outline: 2px solid var(--amber, #fbbf24);
+  outline-offset: 2px;
+}
