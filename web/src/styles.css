@@ -622,3 +622,40 @@ pre { white-space: pre-wrap; word-break: break-word; }
   outline: 2px solid var(--amber, #fbbf24);
   outline-offset: 2px;
 }
+
+/* ── Haunting Score (header) ─────────────────────────────────────── */
+.headline-score { position: relative; align-items: flex-start; }
+.score-peaceful { color: #7fd99a; }
+.score-restless { color: #e8d27a; }
+.score-haunted  { color: #f0a35e; }
+.score-cursed   { color: #ff7a7a; }
+.how-score-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 0.15rem;
+  color: var(--amber, #f0b04e);
+  font: inherit;
+  font-size: 0.75rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.how-score-btn:focus-visible { outline: 2px solid var(--amber, #f0b04e); outline-offset: 2px; }
+.how-score-body {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 50;
+  width: min(320px, 90vw);
+  margin-top: 0.4rem;
+  padding: 0.75rem;
+  background: var(--bg-card, #161628);
+  border: 1px solid var(--border, #2a2a45);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text, #e8e0c0);
+  text-align: left;
+}
+.how-score-body p { margin: 0 0 0.5rem; }
+.how-score-body p:last-child { margin: 0; color: var(--text-muted, #9a9ab8); }

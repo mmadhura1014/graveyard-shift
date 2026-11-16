@@ -1,6 +1,7 @@
 import { HashRouter, Routes, Route, NavLink } from "react-router-dom";
 import { useReport } from "./hooks/useReport";
 import { HeadlineBar } from "./components/HeadlineBar";
+import { countSecurity } from "./utils/hauntingScore";
 import { FileDropZone } from "./components/FileDropZone";
 import { Graveyard } from "./views/Graveyard";
 import { Crypt } from "./views/Crypt";
@@ -29,7 +30,7 @@ function AppShell() {
       </header>
 
       {/* Headline stats */}
-      {report && <HeadlineBar summary={report.summary} demo={report.demo} />}
+      {report && <HeadlineBar summary={report.summary} demo={report.demo} securityCount={countSecurity(report.tombstones)} />}
 
       {/* File drop zone */}
       <div className="app-filedrop">

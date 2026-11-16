@@ -63,7 +63,7 @@ Each task lists **Satisfies** (requirement IDs) and **Verify** (how to confirm i
 - **Commit:** `feat(web): open Séance panel from tombstones`
 
 ### T7 — Header Haunting Score + "How is this calculated?"
-- [ ] T7
+- [x] T7
 - **Do:** Render the Haunting Score and label in `HeadlineBar` (non-colour text label always shown) using T1. Add `web/src/components/HowScoreWorks.tsx` (native `<button aria-expanded>` toggling a labelled region; text states the three inputs and that it is a heuristic, not an AWS metric; waste figure labelled "estimated"). Place beside the score.
 - **Files:** `web/src/components/HeadlineBar.tsx`, `web/src/components/HowScoreWorks.tsx`, `web/src/styles.css`
 - **Satisfies:** AC-HG-003-5, AC-HG-003-8, AC-HG-003-9, AC-HG-006-4

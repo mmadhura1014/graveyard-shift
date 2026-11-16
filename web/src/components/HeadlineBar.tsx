@@ -1,11 +1,21 @@
 import type { ReportSummary } from "../types/report";
+import { hauntingScore, hauntingLabel } from "../utils/hauntingScore";
+import { HowScoreWorks } from "./HowScoreWorks";
 
 interface Props {
   summary: ReportSummary;
   demo: boolean;
+  /** Security-related tombstones, used by the Haunting Score. */
+  securityCount?: number;
 }
 
-export function HeadlineBar({ summary, demo }: Props) {
+export function HeadlineBar({ summary, demo, securityCount = 0 }: Props) {
+  const score = hauntingScore({
+    totalMonthlyCost: summary.estimated_monthly_cost,
+    tombstoneCount: summary.total_tombstones,
+    securityCount,
+  });
+  const label = hauntingLabel(score);
   return (
     <div className="headline-bar" role="region" aria-label="Summary statistics">
       {demo && (
@@ -43,6 +53,19 @@ export function HeadlineBar({ summary, demo }: Props) {
           {summary.undead_credentials_count}
         </span>
         <span className="headline-label">Undead Credentials</span>
+      </div>
+
+      <div className="headline-divider" aria-hidden="true" />
+
+      <div className="headline-stat headline-score">
+        <span
+          className={`headline-number score-${label.toLowerCase()}`}
+          aria-label={`Haunting Score ${score} out of 100, ${label}`}
+        >
+          {score}/100 · {label}
+        </span>
+        <span className="headline-label">Haunting Score</span>
+        <HowScoreWorks />
       </div>
     </div>
   );

@@ -50,3 +50,10 @@ export function hauntingLabel(score: number): string {
 function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
 }
+
+/** Count security-related tombstones (unused IAM keys and unattached security groups). */
+export function countSecurity(tombstones: { resource_type: string }[]): number {
+  return tombstones.filter(
+    (t) => t.resource_type === "IAM::AccessKey" || t.resource_type === "EC2::SecurityGroup",
+  ).length;
+}
