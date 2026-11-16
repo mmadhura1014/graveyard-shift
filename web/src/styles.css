@@ -1,0 +1,503 @@
+/* ═══════════════════════════════════════════════════════════════
+   Graveyard Shift — Global Styles
+   Theme: moody night-time cemetery
+   Palette: dark bg, low-saturation, severity glows
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Tokens ─────────────────────────────────────────────────────── */
+:root {
+  --bg-deep:       #0a0a12;
+  --bg-mid:        #111120;
+  --bg-card:       #161628;
+  --bg-card-hover: #1e1e35;
+  --border:        #2a2a45;
+  --text-primary:  #d8d8e8;
+  --text-muted:    #7878a0;
+  --text-dim:      #4a4a68;
+
+  --green:  #4ade80;
+  --amber:  #fbbf24;
+  --red:    #f87171;
+
+  --green-glow:  0 0 10px rgba(74, 222, 128, 0.5);
+  --amber-glow:  0 0 10px rgba(251, 191, 36, 0.5);
+  --red-glow:    0 0 14px rgba(248, 113, 113, 0.65);
+
+  --moon:   #e8e0c0;
+  --fog:    rgba(180, 180, 220, 0.07);
+
+  --radius: 6px;
+  --font: system-ui, -apple-system, sans-serif;
+}
+
+/* ── Reset ───────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+a { color: var(--amber); }
+code { font-family: monospace; background: #1e1e35; padding: 1px 4px; border-radius: 3px; font-size: 0.88em; }
+pre { white-space: pre-wrap; word-break: break-word; }
+
+/* ── App shell ───────────────────────────────────────────────────── */
+.app { display: flex; flex-direction: column; min-height: 100vh; }
+
+.app-header {
+  background: var(--bg-mid);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.app-title h1 { font-size: 1.3rem; font-weight: 700; color: var(--moon); }
+.app-tagline { font-size: 0.75rem; color: var(--text-muted); margin-left: 0.25rem; }
+
+.app-nav { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+.nav-link {
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-link:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+.nav-link.active { background: var(--bg-card); color: var(--moon); }
+
+.app-filedrop { background: var(--bg-mid); border-bottom: 1px solid var(--border); padding: 0.5rem 1.25rem; }
+.app-main { flex: 1; padding: 1.25rem; }
+.app-loading { text-align: center; padding: 4rem; color: var(--text-muted); }
+.app-footer {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* ── Headline bar ────────────────────────────────────────────────── */
+.headline-bar {
+  background: var(--bg-mid);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.headline-stat { display: flex; flex-direction: column; align-items: center; min-width: 80px; }
+.headline-number { font-size: 1.6rem; font-weight: 700; color: var(--moon); line-height: 1; }
+.headline-cost { color: var(--amber); }
+.headline-risky { color: var(--red); }
+.headline-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+.headline-divider { width: 1px; height: 40px; background: var(--border); }
+.sample-badge {
+  background: #2a1a08;
+  border: 1px solid var(--amber);
+  color: var(--amber);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* ── Severity badge ──────────────────────────────────────────────── */
+.severity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.badge-harmless { background: rgba(74,222,128,0.12);  border-color: var(--green); color: var(--green); }
+.badge-wasteful { background: rgba(251,191,36,0.12);  border-color: var(--amber); color: var(--amber); }
+.badge-risky    { background: rgba(248,113,113,0.12); border-color: var(--red);   color: var(--red);   }
+.badge-sm { font-size: 0.7rem; padding: 0.1rem 0.4rem; }
+.badge-label { }
+
+/* ── File drop zone ──────────────────────────────────────────────── */
+.filedrop-wrapper { position: relative; }
+.filedrop {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+.filedrop:hover, .filedrop--over {
+  border-color: var(--amber);
+  background: rgba(251,191,36,0.05);
+  color: var(--text-primary);
+}
+.filedrop-icon { font-size: 1.1rem; }
+.filedrop-sub { font-size: 0.72rem; color: var(--text-dim); }
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: #2a0a0a;
+  border: 1px solid var(--red);
+  color: var(--red);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  z-index: 999;
+  max-width: 320px;
+}
+
+/* ── Copy button ─────────────────────────────────────────────────── */
+.copy-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.copy-btn:hover { background: var(--bg-card-hover); color: var(--text-primary); border-color: var(--amber); }
+.copy-btn--copied { border-color: var(--green); color: var(--green); background: rgba(74,222,128,0.08); }
+
+/* ── View titles ─────────────────────────────────────────────────── */
+.view-title { font-size: 1.5rem; font-weight: 700; color: var(--moon); margin-bottom: 0.25rem; }
+.view-subtitle { color: var(--text-muted); margin-bottom: 1.25rem; font-size: 0.9rem; }
+
+/* ══════════════════════════════════════════════════════════════════
+   GRAVEYARD VIEW
+   ══════════════════════════════════════════════════════════════════ */
+.graveyard {
+  position: relative;
+  min-height: 520px;
+  background: linear-gradient(to bottom, #05050e 0%, #0a0a18 55%, #0d1008 100%);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+/* Sky */
+.graveyard-sky {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.moon {
+  position: absolute;
+  top: 20px;
+  right: 60px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #fff9e0, var(--moon));
+  box-shadow: 0 0 40px 12px rgba(232,224,192,0.18);
+}
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .star { animation: twinkle 3s ease-in-out infinite alternate; }
+}
+@keyframes twinkle { from { opacity: 0.3; } to { opacity: 0.9; } }
+
+/* Fog */
+.fog-layer { position: absolute; bottom: 90px; left: 0; right: 0; pointer-events: none; height: 120px; }
+.fog {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(140,140,200,0.12) 0%, transparent 100%);
+  border-radius: 50%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fog-1 { animation: drift 18s linear infinite; }
+  .fog-2 { animation: drift 26s linear infinite reverse; opacity: 0.5; }
+}
+@keyframes drift { from { transform: translateX(-25%); } to { transform: translateX(0%); } }
+
+/* Ground */
+.graveyard-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: linear-gradient(to top, #0d150a, #121a0e);
+  border-top: 2px solid #1e2a18;
+}
+
+/* Tombstone field */
+.tombstone-field {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  align-items: end;
+  justify-items: center;
+  gap: 2.25rem 1rem;
+  padding: 170px 1.5rem 90px;
+  z-index: 10;
+  min-height: 520px;
+}
+.graveyard-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  z-index: 20;
+}
+
+/* Tombstone shape */
+.tombstone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+  transition: transform 0.15s;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tombstone:hover { transform: translateY(-4px); }
+}
+.tombstone:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+
+.tombstone-svg { display: block; }
+.tomb-base  { fill: #1a1a2e; }
+.tomb-body  { fill: #22223a; stroke: #333355; stroke-width: 1; }
+.tomb-rip   { font-size: 7px; font-family: serif; fill: #8a8ac0; font-style: italic; letter-spacing: 0.5px; }
+.tomb-name  { font-size: 6px; font-family: ui-monospace, Menlo, monospace; fill: #e8e0c0; font-weight: 700; }
+.tomb-type  { font-size: 4.5px; fill: #9a9ac0; text-transform: uppercase; letter-spacing: 0.4px; }
+.tomb-cost  { font-size: 6px; font-weight: 700; fill: var(--amber); }
+
+/* Severity glows on the SVG */
+.tombstone--harmless .tomb-body { stroke: var(--green); filter: drop-shadow(var(--green-glow)); }
+.tombstone--wasteful .tomb-body { stroke: var(--amber); filter: drop-shadow(var(--amber-glow)); }
+.tombstone--risky    .tomb-body { stroke: var(--red);   filter: drop-shadow(var(--red-glow)); }
+
+.tombstone-badge { margin-top: 4px; }
+
+/* Epitaph tooltip */
+.epitaph {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a2e;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.8rem;
+  min-width: 200px;
+  max-width: 280px;
+  z-index: 50;
+  pointer-events: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+.epitaph p { font-size: 0.78rem; margin-bottom: 0.2rem; color: var(--text-primary); }
+.epitaph-name { font-weight: 700; color: var(--moon); font-size: 0.85rem !important; }
+.epitaph-type { color: var(--text-muted) !important; }
+.epitaph-cost { color: var(--amber) !important; }
+
+/* ══════════════════════════════════════════════════════════════════
+   CRYPT VIEW
+   ══════════════════════════════════════════════════════════════════ */
+.crypt { }
+
+.crypt-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.filter-group { display: flex; align-items: flex-start; gap: 0.5rem; flex-wrap: wrap; }
+.filter-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding-top: 0.3rem; white-space: nowrap; }
+.filter-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.filter-chip {
+  background: var(--bg-mid);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.filter-chip:hover { border-color: var(--amber); color: var(--text-primary); }
+.filter-chip.active { background: rgba(251,191,36,0.1); border-color: var(--amber); color: var(--amber); }
+.filter-clear {
+  background: none;
+  border: 1px solid var(--red);
+  color: var(--red);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  align-self: flex-start;
+}
+.crypt-count { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 0.5rem; }
+
+.crypt-table-wrapper { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+.crypt-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.crypt-th {
+  background: var(--bg-card);
+  color: var(--text-muted);
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+  white-space: nowrap;
+}
+.crypt-th:hover { color: var(--text-primary); }
+.crypt-th.sort-active { color: var(--amber); }
+.crypt-row { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+.crypt-row:hover { background: var(--bg-card-hover); }
+.crypt-row--harmless:hover { background: rgba(74,222,128,0.04); }
+.crypt-row--wasteful:hover { background: rgba(251,191,36,0.04); }
+.crypt-row--risky:hover    { background: rgba(248,113,113,0.05); }
+.crypt-td { padding: 0.55rem 0.75rem; vertical-align: middle; }
+.resource-name { display: block; color: var(--text-primary); }
+.resource-id { display: block; color: var(--text-dim); font-size: 0.72rem; font-family: monospace; }
+.crypt-cost { font-family: monospace; color: var(--amber); }
+.crypt-empty { text-align: center; padding: 2rem; color: var(--text-muted); }
+
+/* ══════════════════════════════════════════════════════════════════
+   EXORCISM VIEW
+   ══════════════════════════════════════════════════════════════════ */
+.exorcism { }
+.exorcism-disclaimer {
+  background: rgba(248,113,113,0.08);
+  border: 1px solid var(--red);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+.exorcism-copy-all { margin-bottom: 1.25rem; }
+.exorcism-list { display: flex; flex-direction: column; gap: 1rem; }
+.exorcism-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.exorcism-card--harmless { border-left: 3px solid var(--green); }
+.exorcism-card--wasteful { border-left: 3px solid var(--amber); }
+.exorcism-card--risky    { border-left: 3px solid var(--red);   }
+.exorcism-card-header { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.exorcism-name { font-weight: 600; color: var(--moon); font-size: 0.95rem; }
+.exorcism-cost { font-size: 0.75rem; color: var(--amber); margin-left: auto; }
+.exorcism-cause { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.2rem; }
+.exorcism-rid { font-size: 0.72rem; color: var(--text-dim); font-family: monospace; margin-bottom: 0.75rem; }
+.exorcism-block { margin-top: 0.6rem; }
+.exorcism-block-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.3rem; }
+.exorcism-block-label { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.exorcism-code {
+  background: var(--bg-mid);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.75rem;
+  font-family: monospace;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  overflow-x: auto;
+}
+.exorcism-dryrun-note { font-size: 0.75rem; color: var(--amber); margin-top: 0.3rem; }
+
+/* ══════════════════════════════════════════════════════════════════
+   ABOUT VIEW
+   ══════════════════════════════════════════════════════════════════ */
+.about { max-width: 760px; }
+.about-section { margin-bottom: 2rem; }
+.about-section h3 { font-size: 1rem; color: var(--moon); margin-bottom: 0.6rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
+.about-section p, .about-section li { font-size: 0.9rem; color: var(--text-primary); line-height: 1.6; margin-bottom: 0.4rem; }
+.about-section ol { padding-left: 1.5rem; }
+.about-privacy-box {
+  background: rgba(74,222,128,0.07);
+  border: 1px solid var(--green);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.about-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.about-table th { background: var(--bg-card); color: var(--text-muted); text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); font-size: 0.75rem; text-transform: uppercase; }
+.about-table td { padding: 0.45rem 0.75rem; border-bottom: 1px solid var(--border); color: var(--text-primary); }
+.about-table tr:last-child td { border-bottom: none; }
+.about-policy-header { margin-bottom: 0.4rem; }
+.about-code {
+  background: var(--bg-mid);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-family: monospace;
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  overflow-x: auto;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.about-footer { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+.about-link { color: var(--amber); font-size: 0.9rem; }
+.about-kiroween { color: var(--text-muted); font-size: 0.82rem; }
+
+/* ══════════════════════════════════════════════════════════════════
+   RESPONSIVE — 390px
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .app-header { gap: 0.75rem; padding: 0.6rem 0.75rem; }
+  .app-title h1 { font-size: 1rem; }
+  .app-tagline { display: none; }
+  .nav-link { padding: 0.35rem 0.5rem; font-size: 0.8rem; }
+  .headline-bar { gap: 0.75rem; padding: 0.6rem 0.75rem; }
+  .headline-number { font-size: 1.2rem; }
+  .tombstone-field { padding: 80px 0.75rem 70px; gap: 0.6rem; }
+  .epitaph { min-width: 170px; max-width: 220px; }
+  .app-main { padding: 0.75rem; }
+  .crypt-table { font-size: 0.78rem; }
+  .crypt-th, .crypt-td { padding: 0.4rem 0.5rem; }
+  .exorcism-card { padding: 0.75rem; }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

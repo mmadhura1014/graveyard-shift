@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/madhura/graveyard-shift/schema/report.schema.json",
+  "title": "GraveyardShiftReport",
+  "description": "Output schema for a Graveyard Shift zombie-resource scan report.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "demo",
+    "account_id",
+    "regions_scanned",
+    "scan_duration_seconds",
+    "tombstones",
+    "summary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Report schema version, e.g. '1.0'.",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "generated_at": {
+      "type": "string",
+      "description": "ISO-8601 UTC timestamp when the scan completed.",
+      "format": "date-time"
+    },
+    "demo": {
+      "type": "boolean",
+      "description": "True when the report was generated from bundled seed data, not a real AWS account."
+    },
+    "account_id": {
+      "type": "string",
+      "description": "12-digit AWS account ID.",
+      "pattern": "^\\d{12}$"
+    },
+    "regions_scanned": {
+      "type": "array",
+      "description": "AWS regions included in this scan.",
+      "items": { "type": "string" },
+      "minItems": 0
+    },
+    "scan_duration_seconds": {
+      "type": "number",
+      "description": "Wall-clock time the scan took, in seconds.",
+      "minimum": 0
+    },
+    "tombstones": {
+      "type": "array",
+      "description": "All zombie resources detected.",
+      "items": { "$ref": "#/$defs/Tombstone" }
+    },
+    "summary": { "$ref": "#/$defs/ReportSummary" }
+  },
+  "$defs": {
+    "Tombstone": {
+      "type": "object",
+      "description": "A single zombie AWS resource.",
+      "required": [
+        "id",
+        "resource_id",
+        "resource_type",
+        "region",
+        "account_id",
+        "cause",
+        "severity",
+        "detected_at",
+        "estimated_monthly_cost",
+        "metadata",
+        "exorcism_cli",
+        "exorcism_tf"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "UUID v4, stable within a report.",
+          "format": "uuid"
+        },
+        "resource_id": {
+          "type": "string",
+          "description": "AWS resource ID, e.g. vol-0abc1234.",
+          "minLength": 1
+        },
+        "resource_name": {
+          "type": ["string", "null"],
+          "description": "Value of the Name tag, or null if absent."
+        },
+        "resource_type": {
+          "type": "string",
+          "description": "Resource type in Namespace::Type notation, e.g. EC2::Volume.",
+          "minLength": 1
+        },
+        "region": {
+          "type": "string",
+          "description": "AWS region, e.g. us-east-1, or 'global' for IAM resources."
+        },
+        "account_id": {
+          "type": "string",
+          "description": "12-digit AWS account ID.",
+          "pattern": "^\\d{12}$"
+        },
+        "cause": {
+          "type": "string",
+          "description": "Human-readable cause of death.",
+          "minLength": 1
+        },
+        "severity": {
+          "type": "string",
+          "description": "Risk/cost severity of this zombie resource.",
+          "enum": ["harmless", "wasteful", "risky"]
+        },
+        "detected_at": {
+          "type": "string",
+          "description": "ISO-8601 UTC timestamp when the scanner detected this resource.",
+          "format": "date-time"
+        },
+        "created_at": {
+          "type": ["string", "null"],
+          "description": "ISO-8601 UTC timestamp when the resource was created, if available.",
+          "format": "date-time"
+        },
+        "estimated_monthly_cost": {
+          "type": "number",
+          "description": "Estimated monthly USD cost. Labelled 'estimated' everywhere in the UI.",
+          "minimum": 0
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Detector-specific supplementary data (size, type, IDs, etc.)."
+        },
+        "exorcism_cli": {
+          "type": "string",
+          "description": "AWS CLI command(s) the user can run to remove this resource.",
+          "minLength": 1
+        },
+        "exorcism_tf": {
+          "type": "string",
+          "description": "Terraform resource address hint for removal."
+        }
+      }
+    },
+    "ReportSummary": {
+      "type": "object",
+      "description": "Aggregate statistics for the report.",
+      "required": [
+        "total_tombstones",
+        "estimated_monthly_cost",
+        "undead_credentials_count",
+        "by_severity",
+        "by_type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "total_tombstones": {
+          "type": "integer",
+          "description": "Total number of zombie resources detected.",
+          "minimum": 0
+        },
+        "estimated_monthly_cost": {
+          "type": "number",
+          "description": "Sum of all tombstone estimated monthly costs (USD). Labelled 'estimated'.",
+          "minimum": 0
+        },
+        "undead_credentials_count": {
+          "type": "integer",
+          "description": "Count of IAM::AccessKey tombstones (stale credentials).",
+          "minimum": 0
+        },
+        "by_severity": {
+          "type": "object",
+          "description": "Tombstone counts broken down by severity.",
+          "required": ["harmless", "wasteful", "risky"],
+          "additionalProperties": false,
+          "properties": {
+            "harmless": { "type": "integer", "minimum": 0 },
+            "wasteful": { "type": "integer", "minimum": 0 },
+            "risky":    { "type": "integer", "minimum": 0 }
+          }
+        },
+        "by_type": {
+          "type": "object",
+          "description": "Tombstone counts broken down by resource_type.",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

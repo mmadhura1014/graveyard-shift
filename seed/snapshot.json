@@ -1,0 +1,395 @@
+{
+  "_comment": "Synthetic seed snapshot for Graveyard Shift demo mode. All IDs, IPs, and account numbers are fake. Account 111122223333.",
+  "account_id": "111122223333",
+  "regions": ["us-east-1", "eu-west-1"],
+  "scanned_at": "2025-07-01T10:00:00Z",
+
+  "volumes": {
+    "us-east-1": [
+      {
+        "VolumeId": "vol-0dead000000000001",
+        "State": "available",
+        "Size": 100,
+        "VolumeType": "gp2",
+        "CreateTime": "2025-05-01T08:00:00Z",
+        "AvailabilityZone": "us-east-1a",
+        "Tags": [{"Key": "Name", "Value": "old-jenkins-data"}]
+      },
+      {
+        "VolumeId": "vol-0dead000000000002",
+        "State": "available",
+        "Size": 500,
+        "VolumeType": "gp3",
+        "CreateTime": "2025-03-15T12:00:00Z",
+        "AvailabilityZone": "us-east-1b",
+        "Tags": []
+      },
+      {
+        "VolumeId": "vol-0dead000000000003",
+        "State": "available",
+        "Size": 20,
+        "VolumeType": "gp2",
+        "CreateTime": "2025-06-30T23:00:00Z",
+        "AvailabilityZone": "us-east-1c",
+        "Tags": [{"Key": "Name", "Value": "just-created-vol"}]
+      },
+      {
+        "VolumeId": "vol-0live000000000001",
+        "State": "in-use",
+        "Size": 50,
+        "VolumeType": "gp3",
+        "CreateTime": "2025-01-10T08:00:00Z",
+        "AvailabilityZone": "us-east-1a",
+        "Tags": [{"Key": "Name", "Value": "prod-app-vol"}]
+      }
+    ],
+    "eu-west-1": [
+      {
+        "VolumeId": "vol-0dead000000000004",
+        "State": "available",
+        "Size": 200,
+        "VolumeType": "io1",
+        "CreateTime": "2025-02-01T00:00:00Z",
+        "AvailabilityZone": "eu-west-1a",
+        "Tags": [{"Key": "Name", "Value": "abandoned-db-volume"}]
+      }
+    ]
+  },
+
+  "snapshots_data": {
+    "us-east-1": [
+      {
+        "SnapshotId": "snap-0dead00000000001",
+        "VolumeId": "vol-0gone000000000001",
+        "StartTime": "2025-01-10T00:00:00Z",
+        "VolumeSize": 80,
+        "OwnerId": "111122223333",
+        "Description": "backup of deleted analytics volume",
+        "Tags": [{"Key": "Name", "Value": "analytics-backup-jan"}]
+      },
+      {
+        "SnapshotId": "snap-0dead00000000002",
+        "VolumeId": "vol-0gone000000000002",
+        "StartTime": "2024-11-20T00:00:00Z",
+        "VolumeSize": 200,
+        "OwnerId": "111122223333",
+        "Description": "nightly-snapshot",
+        "Tags": []
+      },
+      {
+        "SnapshotId": "snap-0live00000000001",
+        "VolumeId": "vol-0live000000000001",
+        "StartTime": "2025-06-28T00:00:00Z",
+        "VolumeSize": 50,
+        "OwnerId": "111122223333",
+        "Description": "weekly-prod-snap",
+        "Tags": [{"Key": "Name", "Value": "prod-weekly"}]
+      },
+      {
+        "SnapshotId": "snap-0aws000000000001",
+        "VolumeId": "vol-0gone000000000099",
+        "StartTime": "2024-01-01T00:00:00Z",
+        "VolumeSize": 8,
+        "OwnerId": "amazon",
+        "Description": "aws managed snapshot",
+        "Tags": []
+      }
+    ],
+    "eu-west-1": []
+  },
+
+  "elastic_ips": {
+    "us-east-1": [
+      {
+        "AllocationId": "eipalloc-0dead0000000001",
+        "PublicIp": "203.0.113.10",
+        "Tags": [{"Key": "Name", "Value": "old-bastion-ip"}]
+      },
+      {
+        "AllocationId": "eipalloc-0dead0000000002",
+        "PublicIp": "203.0.113.11",
+        "Tags": []
+      },
+      {
+        "AllocationId": "eipalloc-0live0000000001",
+        "PublicIp": "203.0.113.20",
+        "AssociationId": "eipassoc-0live0000000001",
+        "Tags": [{"Key": "Name", "Value": "prod-nat-ip"}]
+      }
+    ],
+    "eu-west-1": []
+  },
+
+  "load_balancers": {
+    "us-east-1": [
+      {
+        "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:111122223333:loadbalancer/app/ghost-alb/0000000000000001",
+        "LoadBalancerName": "ghost-alb",
+        "Type": "application",
+        "DNSName": "ghost-alb-123456789.us-east-1.elb.amazonaws.com",
+        "State": {"Code": "active"},
+        "CreatedTime": "2025-01-15T00:00:00Z"
+      },
+      {
+        "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:111122223333:loadbalancer/net/ghost-nlb/0000000000000002",
+        "LoadBalancerName": "ghost-nlb",
+        "Type": "network",
+        "DNSName": "ghost-nlb-123456789.us-east-1.elb.amazonaws.com",
+        "State": {"Code": "active"},
+        "CreatedTime": "2025-02-01T00:00:00Z"
+      },
+      {
+        "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:111122223333:loadbalancer/app/active-alb/0000000000000003",
+        "LoadBalancerName": "active-alb",
+        "Type": "application",
+        "DNSName": "active-alb-123456789.us-east-1.elb.amazonaws.com",
+        "State": {"Code": "active"},
+        "CreatedTime": "2024-12-01T00:00:00Z"
+      }
+    ],
+    "eu-west-1": []
+  },
+
+  "target_groups": {
+    "us-east-1": [
+      {
+        "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:111122223333:targetgroup/ghost-tg/0000000000000001",
+        "LoadBalancerArns": ["arn:aws:elasticloadbalancing:us-east-1:111122223333:loadbalancer/app/ghost-alb/0000000000000001"],
+        "TargetGroupName": "ghost-tg"
+      },
+      {
+        "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:111122223333:targetgroup/active-tg/0000000000000003",
+        "LoadBalancerArns": ["arn:aws:elasticloadbalancing:us-east-1:111122223333:loadbalancer/app/active-alb/0000000000000003"],
+        "TargetGroupName": "active-tg"
+      }
+    ],
+    "eu-west-1": []
+  },
+
+  "target_health": {
+    "us-east-1": {
+      "arn:aws:elasticloadbalancing:us-east-1:111122223333:targetgroup/ghost-tg/0000000000000001": [],
+      "arn:aws:elasticloadbalancing:us-east-1:111122223333:targetgroup/active-tg/0000000000000003": [
+        {"Target": {"Id": "i-0live000000000001"}, "TargetHealth": {"State": "healthy"}}
+      ]
+    },
+    "eu-west-1": {}
+  },
+
+  "nat_gateways": {
+    "us-east-1": [
+      {
+        "NatGatewayId": "nat-0dead00000000001",
+        "State": "available",
+        "VpcId": "vpc-0dead000000000001",
+        "SubnetId": "subnet-0dead000000000001",
+        "CreateTime": "2025-01-01T00:00:00Z",
+        "Tags": [{"Key": "Name", "Value": "staging-nat"}]
+      },
+      {
+        "NatGatewayId": "nat-0live00000000001",
+        "State": "available",
+        "VpcId": "vpc-0live000000000001",
+        "SubnetId": "subnet-0live000000000001",
+        "CreateTime": "2024-10-01T00:00:00Z",
+        "Tags": [{"Key": "Name", "Value": "prod-nat"}]
+      },
+      {
+        "NatGatewayId": "nat-0dead00000000002",
+        "State": "deleting",
+        "VpcId": "vpc-0dead000000000002",
+        "SubnetId": "subnet-0dead000000000002",
+        "CreateTime": "2025-03-01T00:00:00Z",
+        "Tags": []
+      }
+    ],
+    "eu-west-1": []
+  },
+
+  "instances": {
+    "us-east-1": [
+      {
+        "InstanceId": "i-0dead000000000001",
+        "InstanceType": "t3.medium",
+        "State": {"Name": "stopped"},
+        "StateTransitionReason": "User initiated (2025-05-01 09:00:00 GMT)",
+        "LaunchTime": "2025-01-01T00:00:00Z",
+        "Tags": [{"Key": "Name", "Value": "old-staging-server"}],
+        "BlockDeviceMappings": [
+          {"Ebs": {"VolumeId": "vol-0dead000000000001"}},
+          {"Ebs": {"VolumeId": "vol-0dead000000000002"}}
+        ]
+      },
+      {
+        "InstanceId": "i-0dead000000000002",
+        "InstanceType": "m5.large",
+        "State": {"Name": "stopped"},
+        "StateTransitionReason": "User initiated (2025-06-25 14:00:00 GMT)",
+        "LaunchTime": "2025-04-01T00:00:00Z",
+        "Tags": [{"Key": "Name", "Value": "recently-stopped"}],
+        "BlockDeviceMappings": [
+          {"Ebs": {"VolumeId": "vol-0live000000000001"}}
+        ]
+      },
+      {
+        "InstanceId": "i-0live000000000001",
+        "InstanceType": "c5.xlarge",
+        "State": {"Name": "running"},
+        "StateTransitionReason": "",
+        "LaunchTime": "2025-06-01T00:00:00Z",
+        "Tags": [{"Key": "Name", "Value": "prod-web-01"}],
+        "BlockDeviceMappings": [
+          {"Ebs": {"VolumeId": "vol-0live000000000002"}}
+        ]
+      }
+    ],
+    "eu-west-1": []
+  },
+
+  "security_groups": {
+    "us-east-1": [
+      {
+        "GroupId": "sg-0dead000000000001",
+        "GroupName": "abandoned-sg",
+        "VpcId": "vpc-0dead000000000001",
+        "Description": "Security group for a service that no longer exists",
+        "Tags": [{"Key": "Name", "Value": "abandoned-sg"}]
+      },
+      {
+        "GroupId": "sg-0dead000000000002",
+        "GroupName": "forgotten-sg",
+        "VpcId": "vpc-0dead000000000001",
+        "Description": "No idea what this was for",
+        "Tags": []
+      },
+      {
+        "GroupId": "sg-0default000000001",
+        "GroupName": "default",
+        "VpcId": "vpc-0dead000000000001",
+        "Description": "default VPC security group",
+        "Tags": []
+      },
+      {
+        "GroupId": "sg-0live000000000001",
+        "GroupName": "prod-web-sg",
+        "VpcId": "vpc-0live000000000001",
+        "Description": "Production web tier",
+        "Tags": [{"Key": "Name", "Value": "prod-web-sg"}]
+      }
+    ],
+    "eu-west-1": []
+  },
+
+  "enis": {
+    "us-east-1": [
+      {
+        "NetworkInterfaceId": "eni-0live000000000001",
+        "Groups": [{"GroupId": "sg-0live000000000001"}],
+        "Status": "in-use"
+      }
+    ],
+    "eu-west-1": []
+  },
+
+  "log_groups": {
+    "us-east-1": [
+      {
+        "logGroupName": "/aws/lambda/forgotten-function",
+        "storedBytes": 52428800,
+        "metricFilterCount": 0,
+        "retentionInDays": null
+      },
+      {
+        "logGroupName": "/app/old-service/access",
+        "storedBytes": 1073741824,
+        "metricFilterCount": 0,
+        "retentionInDays": null
+      },
+      {
+        "logGroupName": "/app/active-service/app",
+        "storedBytes": 209715200,
+        "metricFilterCount": 2,
+        "retentionInDays": 30
+      },
+      {
+        "logGroupName": "/aws/lambda/active-function",
+        "storedBytes": 10485760,
+        "metricFilterCount": 0,
+        "retentionInDays": 14
+      }
+    ],
+    "eu-west-1": []
+  },
+
+  "cw_metrics": {
+    "us-east-1": {
+      "nat-0dead00000000001:BytesOutToDestination": [
+        {"Sum": 0, "Timestamp": "2025-07-01T00:00:00Z"}
+      ],
+      "nat-0live00000000001:BytesOutToDestination": [
+        {"Sum": 5368709120, "Timestamp": "2025-07-01T00:00:00Z"}
+      ],
+      "ghost-alb:RequestCount": [
+        {"Sum": 0, "Timestamp": "2025-07-01T00:00:00Z"}
+      ],
+      "active-alb:RequestCount": [
+        {"Sum": 1250000, "Timestamp": "2025-07-01T00:00:00Z"}
+      ],
+      "/aws/lambda/forgotten-function:IncomingLogEvents": [
+        {"Sum": 0, "Timestamp": "2025-07-01T00:00:00Z"}
+      ],
+      "/app/old-service/access:IncomingLogEvents": [
+        {"Sum": 0, "Timestamp": "2025-07-01T00:00:00Z"}
+      ],
+      "/app/active-service/app:IncomingLogEvents": [
+        {"Sum": 450000, "Timestamp": "2025-07-01T00:00:00Z"}
+      ]
+    },
+    "eu-west-1": {}
+  },
+
+  "iam_users": [
+    {"UserName": "alice", "UserId": "AIDAAAAAAAAAAAAAAA01", "CreateDate": "2022-01-01T00:00:00Z"},
+    {"UserName": "bob",   "UserId": "AIDAAAAAAAAAAAAAAA02", "CreateDate": "2022-06-01T00:00:00Z"},
+    {"UserName": "carol", "UserId": "AIDAAAAAAAAAAAAAAA03", "CreateDate": "2023-03-01T00:00:00Z"}
+  ],
+
+  "iam_access_keys": [
+    {
+      "UserName": "alice",
+      "AccessKeyId": "AKIAIOSFODNN7EXAMPLE",
+      "Status": "Active",
+      "CreateDate": "2024-01-01T00:00:00Z",
+      "LastUsedDate": "2024-10-01T00:00:00Z",
+      "LastUsedRegion": "us-east-1",
+      "LastUsedService": "s3"
+    },
+    {
+      "UserName": "bob",
+      "AccessKeyId": "AKIAIOSFODNN7EXAMPL2",
+      "Status": "Active",
+      "CreateDate": "2023-06-01T00:00:00Z",
+      "LastUsedDate": null,
+      "LastUsedRegion": "N/A",
+      "LastUsedService": "N/A"
+    },
+    {
+      "UserName": "carol",
+      "AccessKeyId": "AKIAIOSFODNN7EXAMPL3",
+      "Status": "Inactive",
+      "CreateDate": "2023-01-01T00:00:00Z",
+      "LastUsedDate": "2023-09-01T00:00:00Z",
+      "LastUsedRegion": "us-east-1",
+      "LastUsedService": "ec2"
+    },
+    {
+      "UserName": "carol",
+      "AccessKeyId": "AKIAIOSFODNN7EXAMPL4",
+      "Status": "Active",
+      "CreateDate": "2025-06-20T00:00:00Z",
+      "LastUsedDate": "2025-06-28T00:00:00Z",
+      "LastUsedRegion": "us-east-1",
+      "LastUsedService": "iam"
+    }
+  ]
+}

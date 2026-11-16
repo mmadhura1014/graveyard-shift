@@ -1,0 +1,38 @@
+{
+  "_comment": "Unit prices for Graveyard Shift cost estimates. All figures are estimates. Last verified against AWS public pricing pages.",
+  "last_updated": "2025-07-01",
+  "prices": {
+    "ebs_gp2_per_gb_month":      0.10,
+    "ebs_gp3_per_gb_month":      0.08,
+    "ebs_io1_per_gb_month":      0.125,
+    "ebs_io2_per_gb_month":      0.125,
+    "ebs_st1_per_gb_month":      0.045,
+    "ebs_sc1_per_gb_month":      0.015,
+    "ebs_standard_per_gb_month": 0.05,
+    "eip_unassociated_per_hr":   0.005,
+    "nat_per_hr":                0.045,
+    "nat_per_gb":                0.045,
+    "alb_per_hr":                0.008,
+    "nlb_per_hr":                0.006,
+    "cw_logs_per_gb_month":      0.03,
+    "snapshot_per_gb_month":     0.05
+  },
+  "region_multipliers": {
+    "us-east-1":      1.00,
+    "us-east-2":      1.00,
+    "us-west-1":      1.14,
+    "us-west-2":      1.00,
+    "eu-west-1":      1.11,
+    "eu-west-2":      1.19,
+    "eu-west-3":      1.19,
+    "eu-central-1":   1.11,
+    "eu-north-1":     1.09,
+    "ap-southeast-1": 1.08,
+    "ap-southeast-2": 1.14,
+    "ap-northeast-1": 1.14,
+    "ap-northeast-2": 1.10,
+    "ap-south-1":     1.09,
+    "ca-central-1":   1.10,
+    "sa-east-1":      1.50
+  }
+}

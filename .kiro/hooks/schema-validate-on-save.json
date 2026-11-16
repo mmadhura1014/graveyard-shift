@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Validate schema and seed report on save",
+      "trigger": "PostFileSave",
+      "description": "On save of schema/report.schema.json, validate the schema itself and validate seed/report.json against it. Read-only.",
+      "matcher": "schema/report\\.schema\\.json$",
+      "action": {
+        "type": "command",
+        "command": "cd \"$(git rev-parse --show-toplevel 2>/dev/null || pwd)\" || exit 0\n.venv/bin/python3.12 -c \"import json, jsonschema; schema = json.load(open('schema/report.schema.json')); jsonschema.Draft202012Validator.check_schema(schema); report = json.load(open('seed/report.json')); jsonschema.validate(report, schema); print('Schema valid. seed/report.json validates OK.')\"",
+        "timeout": 60
+      }
+    }
+  ]
+}

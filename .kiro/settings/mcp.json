@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "awslabs.pricing-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.pricing-mcp-server@latest"],
+      "env": {
+        "AWS_REGION": "us-east-1"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "awslabs.aws-documentation-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-documentation-mcp-server@latest"],
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}

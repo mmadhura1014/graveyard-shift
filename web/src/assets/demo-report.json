@@ -1,0 +1,392 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-16T06:42:11.494650+00:00",
+  "demo": true,
+  "account_id": "111122223333",
+  "regions_scanned": [
+    "us-east-1",
+    "eu-west-1"
+  ],
+  "scan_duration_seconds": 0.003,
+  "tombstones": [
+    {
+      "id": "b2fecad3-08d7-4b25-9950-13d407afb9c3",
+      "resource_id": "vol-0dead000000000001",
+      "resource_name": "old-jenkins-data",
+      "resource_type": "EC2::Volume",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "abandoned",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": "2025-05-01T08:00:00+00:00",
+      "estimated_monthly_cost": 10.0,
+      "metadata": {
+        "size_gib": 100,
+        "volume_type": "gp2",
+        "availability_zone": "us-east-1a"
+      },
+      "exorcism_cli": "aws ec2 delete-volume --volume-id vol-0dead000000000001 --region us-east-1 --dry-run",
+      "exorcism_tf": "resource \"aws_ebs_volume\" \"old_jenkins_data\" {}"
+    },
+    {
+      "id": "8bef8603-dd00-4fb2-a219-c66c3607f846",
+      "resource_id": "vol-0dead000000000002",
+      "resource_name": null,
+      "resource_type": "EC2::Volume",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "abandoned",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": "2025-03-15T12:00:00+00:00",
+      "estimated_monthly_cost": 40.0,
+      "metadata": {
+        "size_gib": 500,
+        "volume_type": "gp3",
+        "availability_zone": "us-east-1b"
+      },
+      "exorcism_cli": "aws ec2 delete-volume --volume-id vol-0dead000000000002 --region us-east-1 --dry-run",
+      "exorcism_tf": "resource \"aws_ebs_volume\" \"vol_0dead000000000002\" {}"
+    },
+    {
+      "id": "3f9b6244-2caf-435d-9a27-088023df8bc1",
+      "resource_id": "vol-0dead000000000004",
+      "resource_name": "abandoned-db-volume",
+      "resource_type": "EC2::Volume",
+      "region": "eu-west-1",
+      "account_id": "111122223333",
+      "cause": "abandoned",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": "2025-02-01T00:00:00+00:00",
+      "estimated_monthly_cost": 27.75,
+      "metadata": {
+        "size_gib": 200,
+        "volume_type": "io1",
+        "availability_zone": "eu-west-1a"
+      },
+      "exorcism_cli": "aws ec2 delete-volume --volume-id vol-0dead000000000004 --region eu-west-1 --dry-run",
+      "exorcism_tf": "resource \"aws_ebs_volume\" \"abandoned_db_volume\" {}"
+    },
+    {
+      "id": "03ee767c-b293-4d2a-8869-04cd99180190",
+      "resource_id": "snap-0dead00000000001",
+      "resource_name": "analytics-backup-jan",
+      "resource_type": "EC2::Snapshot",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "orphaned",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": "2025-01-10T00:00:00+00:00",
+      "estimated_monthly_cost": 4.0,
+      "metadata": {
+        "size_gib": 80,
+        "source_volume_id": "vol-0gone000000000001",
+        "owner_id": "111122223333"
+      },
+      "exorcism_cli": "aws ec2 delete-snapshot --snapshot-id snap-0dead00000000001 --region us-east-1 --dry-run",
+      "exorcism_tf": "resource \"aws_ebs_snapshot\" \"snap_0dead00000000001\" {}"
+    },
+    {
+      "id": "ce58ab24-de2c-43af-a64a-92c7f85acea9",
+      "resource_id": "snap-0dead00000000002",
+      "resource_name": "nightly-snapshot",
+      "resource_type": "EC2::Snapshot",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "orphaned",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": "2024-11-20T00:00:00+00:00",
+      "estimated_monthly_cost": 10.0,
+      "metadata": {
+        "size_gib": 200,
+        "source_volume_id": "vol-0gone000000000002",
+        "owner_id": "111122223333"
+      },
+      "exorcism_cli": "aws ec2 delete-snapshot --snapshot-id snap-0dead00000000002 --region us-east-1 --dry-run",
+      "exorcism_tf": "resource \"aws_ebs_snapshot\" \"snap_0dead00000000002\" {}"
+    },
+    {
+      "id": "e5b07ac7-ad7d-4d5d-86ef-e0972e4c6949",
+      "resource_id": "eipalloc-0dead0000000001",
+      "resource_name": "old-bastion-ip",
+      "resource_type": "EC2::EIP",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "idle, costs money",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": null,
+      "estimated_monthly_cost": 3.65,
+      "metadata": {
+        "public_ip": "203.0.113.10"
+      },
+      "exorcism_cli": "aws ec2 release-address --allocation-id eipalloc-0dead0000000001 --region us-east-1 --dry-run",
+      "exorcism_tf": "resource \"aws_eip\" \"old_bastion_ip\" {}"
+    },
+    {
+      "id": "b72cf723-fd8f-4914-9460-ff3bcc553b61",
+      "resource_id": "eipalloc-0dead0000000002",
+      "resource_name": null,
+      "resource_type": "EC2::EIP",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "idle, costs money",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": null,
+      "estimated_monthly_cost": 3.65,
+      "metadata": {
+        "public_ip": "203.0.113.11"
+      },
+      "exorcism_cli": "aws ec2 release-address --allocation-id eipalloc-0dead0000000002 --region us-east-1 --dry-run",
+      "exorcism_tf": "resource \"aws_eip\" \"eipalloc_0dead0000000002\" {}"
+    },
+    {
+      "id": "417f1c7a-e385-427c-b5f7-2a9fd426e596",
+      "resource_id": "arn:aws:elasticloadbalancing:us-east-1:111122223333:loadbalancer/app/ghost-alb/0000000000000001",
+      "resource_name": "ghost-alb",
+      "resource_type": "ELB::LoadBalancer",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "lonely",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": "2025-01-15T00:00:00+00:00",
+      "estimated_monthly_cost": 5.84,
+      "metadata": {
+        "lb_type": "ALB",
+        "dns_name": "ghost-alb-123456789.us-east-1.elb.amazonaws.com",
+        "reason": "no registered targets"
+      },
+      "exorcism_cli": "aws elbv2 delete-load-balancer --load-balancer-arn arn:aws:elasticloadbalancing:us-east-1:111122223333:loadbalancer/app/ghost-alb/0000000000000001 --region us-east-1",
+      "exorcism_tf": "resource \"aws_lb\" \"ghost_alb\" {}"
+    },
+    {
+      "id": "9e5c4c51-05d7-47f0-9365-2f2f11a5201f",
+      "resource_id": "arn:aws:elasticloadbalancing:us-east-1:111122223333:loadbalancer/net/ghost-nlb/0000000000000002",
+      "resource_name": "ghost-nlb",
+      "resource_type": "ELB::LoadBalancer",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "lonely",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": "2025-02-01T00:00:00+00:00",
+      "estimated_monthly_cost": 4.38,
+      "metadata": {
+        "lb_type": "NLB",
+        "dns_name": "ghost-nlb-123456789.us-east-1.elb.amazonaws.com",
+        "reason": "no registered targets"
+      },
+      "exorcism_cli": "aws elbv2 delete-load-balancer --load-balancer-arn arn:aws:elasticloadbalancing:us-east-1:111122223333:loadbalancer/net/ghost-nlb/0000000000000002 --region us-east-1",
+      "exorcism_tf": "resource \"aws_lb\" \"ghost_nlb\" {}"
+    },
+    {
+      "id": "e05453c7-b62e-4c42-94f5-28050dfaa90d",
+      "resource_id": "nat-0dead00000000001",
+      "resource_name": "staging-nat",
+      "resource_type": "EC2::NatGateway",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "idle",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": "2025-01-01T00:00:00+00:00",
+      "estimated_monthly_cost": 32.85,
+      "metadata": {
+        "vpc_id": "vpc-0dead000000000001",
+        "subnet_id": "subnet-0dead000000000001",
+        "total_bytes_14d": 0
+      },
+      "exorcism_cli": "aws ec2 delete-nat-gateway --nat-gateway-id nat-0dead00000000001 --region us-east-1",
+      "exorcism_tf": "resource \"aws_nat_gateway\" \"staging_nat\" {}"
+    },
+    {
+      "id": "0d0375be-2276-480a-9fa3-a927265cd49a",
+      "resource_id": "i-0dead000000000001",
+      "resource_name": "old-staging-server",
+      "resource_type": "EC2::Instance",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "dead but still billed for EBS",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": "2025-01-01T00:00:00+00:00",
+      "estimated_monthly_cost": 60.0,
+      "metadata": {
+        "instance_type": "t3.medium",
+        "ebs_size_gib": 600,
+        "stopped_days": 61
+      },
+      "exorcism_cli": "aws ec2 terminate-instances --instance-ids i-0dead000000000001 --region us-east-1 --dry-run",
+      "exorcism_tf": "resource \"aws_instance\" \"old_staging_server\" {}"
+    },
+    {
+      "id": "0265dbe9-95e4-4bcf-a153-423c59ec9b6f",
+      "resource_id": "AKIAIOSFODNN7EXAMPLE",
+      "resource_name": "alice/AKIAIOSFODNN7EXAMPLE",
+      "resource_type": "IAM::AccessKey",
+      "region": "global",
+      "account_id": "111122223333",
+      "cause": "undead credentials",
+      "severity": "risky",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": "2024-01-01T00:00:00+00:00",
+      "estimated_monthly_cost": 0.0,
+      "metadata": {
+        "username": "alice",
+        "key_id": "AKIAIOSFODNN7EXAMPLE",
+        "status": "Active",
+        "idle_days": 273,
+        "last_used_date": "2024-10-01T00:00:00+00:00"
+      },
+      "exorcism_cli": "aws iam delete-access-key --access-key-id AKIAIOSFODNN7EXAMPLE --user-name alice",
+      "exorcism_tf": "resource \"aws_iam_access_key\" \"alice_AKIAIOSFODNN7EXAMPLE\" {}"
+    },
+    {
+      "id": "b0fe79fe-23d3-4ab4-bcd5-4d1439a36299",
+      "resource_id": "AKIAIOSFODNN7EXAMPL2",
+      "resource_name": "bob/AKIAIOSFODNN7EXAMPL2",
+      "resource_type": "IAM::AccessKey",
+      "region": "global",
+      "account_id": "111122223333",
+      "cause": "undead credentials",
+      "severity": "risky",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": "2023-06-01T00:00:00+00:00",
+      "estimated_monthly_cost": 0.0,
+      "metadata": {
+        "username": "bob",
+        "key_id": "AKIAIOSFODNN7EXAMPL2",
+        "status": "Active",
+        "idle_days": 761,
+        "last_used_date": null
+      },
+      "exorcism_cli": "aws iam delete-access-key --access-key-id AKIAIOSFODNN7EXAMPL2 --user-name bob",
+      "exorcism_tf": "resource \"aws_iam_access_key\" \"bob_AKIAIOSFODNN7EXAMPL2\" {}"
+    },
+    {
+      "id": "bc3d5a19-14fa-43f9-ac17-db1b7ef3a180",
+      "resource_id": "AKIAIOSFODNN7EXAMPL3",
+      "resource_name": "carol/AKIAIOSFODNN7EXAMPL3",
+      "resource_type": "IAM::AccessKey",
+      "region": "global",
+      "account_id": "111122223333",
+      "cause": "undead credentials",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": "2023-01-01T00:00:00+00:00",
+      "estimated_monthly_cost": 0.0,
+      "metadata": {
+        "username": "carol",
+        "key_id": "AKIAIOSFODNN7EXAMPL3",
+        "status": "Inactive",
+        "idle_days": 669,
+        "last_used_date": "2023-09-01T00:00:00+00:00"
+      },
+      "exorcism_cli": "aws iam delete-access-key --access-key-id AKIAIOSFODNN7EXAMPL3 --user-name carol",
+      "exorcism_tf": "resource \"aws_iam_access_key\" \"carol_AKIAIOSFODNN7EXAMPL3\" {}"
+    },
+    {
+      "id": "21247a16-fff8-475b-b152-51160ebf36d8",
+      "resource_id": "sg-0dead000000000001",
+      "resource_name": "abandoned-sg",
+      "resource_type": "EC2::SecurityGroup",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "forgotten",
+      "severity": "harmless",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": null,
+      "estimated_monthly_cost": 0.0,
+      "metadata": {
+        "vpc_id": "vpc-0dead000000000001",
+        "group_name": "abandoned-sg"
+      },
+      "exorcism_cli": "aws ec2 delete-security-group --group-id sg-0dead000000000001 --region us-east-1 --dry-run",
+      "exorcism_tf": "resource \"aws_security_group\" \"abandoned_sg\" {}"
+    },
+    {
+      "id": "14a3326e-abca-4cb0-a227-ae9077bddb3a",
+      "resource_id": "sg-0dead000000000002",
+      "resource_name": "forgotten-sg",
+      "resource_type": "EC2::SecurityGroup",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "forgotten",
+      "severity": "harmless",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": null,
+      "estimated_monthly_cost": 0.0,
+      "metadata": {
+        "vpc_id": "vpc-0dead000000000001",
+        "group_name": "forgotten-sg"
+      },
+      "exorcism_cli": "aws ec2 delete-security-group --group-id sg-0dead000000000002 --region us-east-1 --dry-run",
+      "exorcism_tf": "resource \"aws_security_group\" \"forgotten_sg\" {}"
+    },
+    {
+      "id": "e6ebb41a-a462-4f63-a467-83e7ce61e558",
+      "resource_id": "/aws/lambda/forgotten-function",
+      "resource_name": "/aws/lambda/forgotten-function",
+      "resource_type": "CWLogs::LogGroup",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "hoarder",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": null,
+      "estimated_monthly_cost": 0.0,
+      "metadata": {
+        "log_group_name": "/aws/lambda/forgotten-function",
+        "stored_bytes": 52428800
+      },
+      "exorcism_cli": "aws logs delete-log-group --log-group-name /aws/lambda/forgotten-function --region us-east-1",
+      "exorcism_tf": "resource \"aws_cloudwatch_log_group\" \"_aws_lambda_forgotten_function\" {}"
+    },
+    {
+      "id": "4f9cec12-e3c8-4caf-8750-6481fa74774a",
+      "resource_id": "/app/old-service/access",
+      "resource_name": "/app/old-service/access",
+      "resource_type": "CWLogs::LogGroup",
+      "region": "us-east-1",
+      "account_id": "111122223333",
+      "cause": "hoarder",
+      "severity": "wasteful",
+      "detected_at": "2025-07-01T10:00:00+00:00",
+      "created_at": null,
+      "estimated_monthly_cost": 0.03,
+      "metadata": {
+        "log_group_name": "/app/old-service/access",
+        "stored_bytes": 1073741824
+      },
+      "exorcism_cli": "aws logs delete-log-group --log-group-name /app/old-service/access --region us-east-1",
+      "exorcism_tf": "resource \"aws_cloudwatch_log_group\" \"_app_old_service_access\" {}"
+    }
+  ],
+  "summary": {
+    "total_tombstones": 18,
+    "estimated_monthly_cost": 202.15,
+    "undead_credentials_count": 3,
+    "by_severity": {
+      "harmless": 2,
+      "wasteful": 14,
+      "risky": 2
+    },
+    "by_type": {
+      "EC2::Volume": 3,
+      "EC2::Snapshot": 2,
+      "EC2::EIP": 2,
+      "ELB::LoadBalancer": 2,
+      "EC2::NatGateway": 1,
+      "EC2::Instance": 1,
+      "IAM::AccessKey": 3,
+      "EC2::SecurityGroup": 2,
+      "CWLogs::LogGroup": 2
+    }
+  }
+}

@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+.hypothesis/
+
+# Node
+node_modules/
+web/dist/
+web/.vite/
+
+# CDK (not used but keep the pattern in case)
+cdk.out/
+
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Generated reports (don't commit personal scan results)
+/report.json
+/tmp/
+
+# NOTE: .kiro/ is intentionally NOT ignored — it is a submission requirement
