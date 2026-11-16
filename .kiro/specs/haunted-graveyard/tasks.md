@@ -83,7 +83,7 @@ Each task lists **Satisfies** (requirement IDs) and **Verify** (how to confirm i
 ## M3 — Share-card canvas + exorcism animation
 
 ### T9 — Share-card canvas component
-- [ ] T9
+- [x] T9
 - **Do:** Add `web/src/components/ShareCard.tsx`: "Share my graveyard" button; on click draw score/label, total waste "(estimated)", and top-3 names onto an offscreen `<canvas>` (system `sans-serif` font), then `toBlob(png)` → client-side download via a temporary blob URL (revoked after). If Canvas/`toBlob` unavailable, disable the button with a text explanation. Use only `buildShareCardData` (T3) for content; never read identifiers. Render the button in the Graveyard view.
 - **Files:** `web/src/components/ShareCard.tsx`, `web/src/views/Graveyard.tsx`, `web/src/styles.css`
 - **Satisfies:** AC-HG-004-1, AC-HG-004-4, AC-HG-004-6, AC-HG-009-4

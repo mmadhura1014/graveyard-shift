@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Report } from "../types/report";
 import { TombstoneShape } from "../components/TombstoneShape";
+import { ShareCard } from "../components/ShareCard";
 import { SeancePanel } from "../components/SeancePanel";
 import type { Tombstone } from "../types/report";
 
@@ -55,6 +56,8 @@ export function Graveyard({ report }: Props) {
           onClose={() => setSelected(null)}
         />
       )}
+
+      <ShareCard report={report} />
 
       {/* Ground line */}
       <div className="graveyard-ground" aria-hidden="true" />

@@ -717,3 +717,28 @@ pre { white-space: pre-wrap; word-break: break-word; }
   40%  { opacity: 0.8; filter: brightness(1.8) blur(0); }
   100% { opacity: 0; transform: translateY(-40px) scale(1.15); filter: brightness(2) blur(4px); }
 }
+
+/* ── Share card button ───────────────────────────────────────────── */
+.share-card {
+  position: relative;
+  z-index: 15;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1.5rem 1rem;
+}
+.share-btn {
+  background: var(--amber, #f0b04e);
+  color: #1a1206;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.share-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.share-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.share-note { font-size: 0.8rem; color: var(--text-muted, #9a9ab8); }
+.share-error { font-size: 0.8rem; color: #ff7a7a; }
