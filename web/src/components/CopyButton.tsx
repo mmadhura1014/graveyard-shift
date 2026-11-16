@@ -3,15 +3,18 @@ import { useState } from "react";
 interface Props {
   text: string;
   label?: string;
+  /** Called after a successful copy (used by the exorcism animation trigger). */
+  onCopied?: () => void;
 }
 
-export function CopyButton({ text, label = "Copy" }: Props) {
+export function CopyButton({ text, label = "Copy", onCopied }: Props) {
   const [copied, setCopied] = useState(false);
 
   async function handleCopy() {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
+      onCopied?.();
       setTimeout(() => setCopied(false), 2000);
     } catch {
       // Fallback for environments without clipboard API
@@ -24,6 +27,7 @@ export function CopyButton({ text, label = "Copy" }: Props) {
       document.execCommand("copy");
       document.body.removeChild(el);
       setCopied(true);
+      onCopied?.();
       setTimeout(() => setCopied(false), 2000);
     }
   }
