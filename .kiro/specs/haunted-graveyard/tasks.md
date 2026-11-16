@@ -91,7 +91,7 @@ Each task lists **Satisfies** (requirement IDs) and **Verify** (how to confirm i
 - **Commit:** `feat(web): add share-card PNG export`
 
 ### T10 — Exorcism vanishing animation
-- [ ] T10
+- [x] T10
 - **Do:** `TombstoneShape`: subscribe to `exorcisedResourceId`/`exorcismNonce`; when matching `t.resource_id`, set a short `vanishing` state → `tombstone--vanishing` class (CSS `ghost-vanish`). `Exorcism`: render a small inline ghost glyph per card and subscribe likewise. Reduced-motion guard in JS + CSS. Wire the Exorcism copy buttons to `onCopied={() => exorcise(t.resource_id)}`.
 - **Files:** `web/src/components/TombstoneShape.tsx`, `web/src/views/Exorcism.tsx`, `web/src/styles.css`
 - **Satisfies:** AC-HG-005-1, AC-HG-005-2, AC-HG-005-4, AC-HG-005-5
@@ -103,7 +103,7 @@ Each task lists **Satisfies** (requirement IDs) and **Verify** (how to confirm i
 ## M4 — Bug fix + docs
 
 ### T11 — Fix About.tsx GitHub link
-- [ ] T11
+- [x] T11
 - **Do:** In `web/src/views/About.tsx`, change `https://github.com/madhura/graveyard-shift` → `https://github.com/mmadhura1014/graveyard-shift`.
 - **Files:** `web/src/views/About.tsx`
 - **Satisfies:** AC-HG-010-1

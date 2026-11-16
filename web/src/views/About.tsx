@@ -122,7 +122,7 @@ export function About() {
 
       <section className="about-section about-footer">
         <a
-          href="https://github.com/madhura/graveyard-shift"
+          href="https://github.com/mmadhura1014/graveyard-shift"
           target="_blank"
           rel="noopener noreferrer"
           className="about-link"
