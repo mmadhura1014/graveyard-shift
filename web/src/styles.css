@@ -659,3 +659,50 @@ pre { white-space: pre-wrap; word-break: break-word; }
 }
 .how-score-body p { margin: 0 0 0.5rem; }
 .how-score-body p:last-child { margin: 0; color: var(--text-muted, #9a9ab8); }
+
+/* ── Ambient life: ghosts and candles ────────────────────────────── */
+.tomb-ghost {
+  position: absolute;
+  top: -46px;
+  left: 50%;
+  margin-left: -17px;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.85;
+}
+.ghost-body { fill: #e8ecff; fill-opacity: 0.85; }
+.ghost-eye  { fill: #1a1a2e; }
+.tomb-candle {
+  position: absolute;
+  bottom: 22px;
+  right: -6px;
+  width: 6px;
+  height: 14px;
+  border-radius: 1px;
+  background: #d8cfa8;
+  pointer-events: none;
+}
+.tomb-candle::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -9px;
+  width: 6px;
+  height: 9px;
+  margin-left: -3px;
+  border-radius: 50% 50% 40% 40%;
+  background: radial-gradient(circle at 50% 70%, #fff3b0, #f0a020 70%);
+  box-shadow: 0 0 8px 3px rgba(240, 160, 32, 0.45);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tomb-ghost { animation: ghost-float 5s ease-in-out infinite; }
+  .tomb-candle::before { animation: candle-flicker 1.6s ease-in-out infinite alternate; }
+}
+@keyframes ghost-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-10px) rotate(2deg); }
+}
+@keyframes candle-flicker {
+  from { opacity: 0.75; transform: scale(0.9); }
+  to   { opacity: 1;    transform: scale(1.1); }
+}

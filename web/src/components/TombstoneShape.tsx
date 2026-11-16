@@ -9,6 +9,8 @@ interface Props {
   maxCost: number;
   /** Called when the stone is activated (click, Enter or Space). */
   onOpen?: (el: HTMLElement) => void;
+  /** Show a floating ghost above this stone (used for the costliest few). */
+  floating?: boolean;
 }
 
 const MIN_HEIGHT = 140;
@@ -25,7 +27,7 @@ function shortType(resourceType: string): string {
   return part.length > 12 ? `${part.slice(0, 11)}…` : part;
 }
 
-export function TombstoneShape({ tombstone: t, maxCost, onOpen }: Props) {
+export function TombstoneShape({ tombstone: t, maxCost, onOpen, floating = false }: Props) {
   const [hovered, setHovered] = useState(false);
 
   const fraction = maxCost > 0 ? Math.min(t.estimated_monthly_cost / maxCost, 1) : 0;
@@ -54,6 +56,14 @@ export function TombstoneShape({ tombstone: t, maxCost, onOpen }: Props) {
       }}
       aria-label={`${name}, ${t.resource_type}, ${t.cause}, ${formatCostShort(t.estimated_monthly_cost)}`}
     >
+      {floating && (
+        <svg className="tomb-ghost" viewBox="0 0 24 30" width="34" height="42" aria-hidden="true" focusable="false">
+          <path d="M3,28 L3,12 Q3,2 12,2 Q21,2 21,12 L21,28 L17,24 L12,28 L7,24 Z" className="ghost-body" />
+          <circle cx="9" cy="12" r="1.8" className="ghost-eye" />
+          <circle cx="15" cy="12" r="1.8" className="ghost-eye" />
+        </svg>
+      )}
+
       {/* SVG tombstone shape */}
       <svg
         viewBox="0 0 65 100"
@@ -79,6 +89,8 @@ export function TombstoneShape({ tombstone: t, maxCost, onOpen }: Props) {
           </text>
         )}
       </svg>
+
+      <span className="tomb-candle" aria-hidden="true" />
 
       {/* Severity badge below the stone (not colour-only) */}
       <div className="tombstone-badge" aria-hidden="true">

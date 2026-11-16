@@ -71,7 +71,7 @@ Each task lists **Satisfies** (requirement IDs) and **Verify** (how to confirm i
 - **Commit:** `feat(web): show Haunting Score with explanation in header`
 
 ### T8 — Ambient life (ghosts, candles, fog)
-- [ ] T8
+- [x] T8
 - **Do:** `TombstoneShape`: optional `floating` prop → render a small inline-SVG ghost above the stone; render a small CSS candle at the base (staggered flicker). `Graveyard`: set `floating` for the top-3 by cost; extend the existing fog layer. All animations under `@media (prefers-reduced-motion: no-preference)`.
 - **Files:** `web/src/components/TombstoneShape.tsx`, `web/src/views/Graveyard.tsx`, `web/src/styles.css`
 - **Satisfies:** AC-HG-002-1, AC-HG-002-2, AC-HG-002-3, AC-HG-002-4, AC-HG-002-5, AC-HG-007-2

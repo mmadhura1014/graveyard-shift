@@ -14,6 +14,7 @@ export function Graveyard({ report }: Props) {
   const tombstones = [...report.tombstones].sort(
     (a, b) => b.estimated_monthly_cost - a.estimated_monthly_cost,
   );
+  const floatingIds = new Set(tombstones.filter((t) => t.estimated_monthly_cost > 0).slice(0, 3).map((t) => t.id));
   const maxCost = Math.max(...tombstones.map((t) => t.estimated_monthly_cost), 1);
 
   return (
@@ -42,7 +43,7 @@ export function Graveyard({ report }: Props) {
       <div className="tombstone-field" role="list" aria-label={`${tombstones.length} zombie resources`}>
         {tombstones.map((t) => (
           <div key={t.id} role="listitem">
-            <TombstoneShape tombstone={t} maxCost={maxCost} onOpen={(el) => setSelected({ t, el })} />
+            <TombstoneShape tombstone={t} maxCost={maxCost} onOpen={(el) => setSelected({ t, el })} floating={floatingIds.has(t.id)} />
           </div>
         ))}
       </div>
