@@ -81,7 +81,8 @@ pre { white-space: pre-wrap; word-break: break-word; }
 .nav-link.active { background: var(--bg-card); color: var(--moon); }
 
 .app-filedrop { background: var(--bg-mid); border-bottom: 1px solid var(--border); padding: 0.5rem 1.25rem; }
-.app-main { flex: 1; padding: 1.25rem; }
+.app-main { flex: 1; padding: 1.25rem; min-width: 0; }
+.graveyard { max-width: 100%; }
 .app-loading { text-align: center; padding: 4rem; color: var(--text-muted); }
 .app-footer {
   padding: 0.75rem 1.25rem;
@@ -489,7 +490,18 @@ pre { white-space: pre-wrap; word-break: break-word; }
   .nav-link { padding: 0.35rem 0.5rem; font-size: 0.8rem; }
   .headline-bar { gap: 0.75rem; padding: 0.6rem 0.75rem; }
   .headline-number { font-size: 1.2rem; }
-  .tombstone-field { padding: 80px 0.75rem 70px; gap: 0.6rem; }
+  .tombstone-field {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 140px 0.5rem 70px;
+    gap: 1.75rem 0.5rem;
+  }
+  .moon { right: 24px; width: 48px; height: 48px; }
+  .headline-bar { justify-content: space-between; row-gap: 0.5rem; }
+  .headline-stat { min-width: 0; }
+  .headline-label { white-space: normal; text-align: center; font-size: 0.62rem; }
+  .headline-divider { display: none; }
+  .app-filedrop { padding: 0.5rem 0.75rem; }
+  .app-filedrop * { min-width: 0; white-space: normal; }
   .epitaph { min-width: 170px; max-width: 220px; }
   .app-main { padding: 0.75rem; }
   .crypt-table { font-size: 0.78rem; }

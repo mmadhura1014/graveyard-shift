@@ -78,7 +78,7 @@ export function About() {
       <section className="about-section">
         <h3>How to use</h3>
         <ol>
-          <li>Install: <code>pip install graveyard-shift</code> (or clone the repo and run <code>make setup</code>)</li>
+          <li>Install: clone the repo and run <code>make setup</code></li>
           <li>Demo: <code>graveyard scan --demo --out report.json</code></li>
           <li>Live scan: <code>graveyard scan --profile my-profile --regions us-east-1 --out report.json</code></li>
           <li>Open the web app and drop your <code>report.json</code> in.</li>
