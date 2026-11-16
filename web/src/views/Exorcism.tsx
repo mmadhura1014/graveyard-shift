@@ -1,8 +1,18 @@
-import type { Report } from "../types/report";
+import type { Report, Tombstone } from "../types/report";
+import { useReportStore } from "../store/reportStore";
+import { useVanishing } from "../hooks/useVanishing";
 import { CopyButton } from "../components/CopyButton";
 import { SeverityBadge } from "../components/SeverityBadge";
 import { displayName } from "../utils/escape";
 import { formatCostShort } from "../utils/cost";
+
+/** Small ghost that vanishes when this resource's cleanup command is copied. */
+function CardGhost({ t }: { t: Tombstone }) {
+  const vanishing = useVanishing(t.resource_id);
+  return (
+    <span className={`card-ghost${vanishing ? " tombstone--vanishing" : ""}`} aria-hidden="true">👻</span>
+  );
+}
 
 interface Props {
   report: Report;
@@ -10,6 +20,7 @@ interface Props {
 
 export function Exorcism({ report }: Props) {
   const { tombstones } = report;
+  const exorcise = useReportStore((s) => s.exorcise);
 
   const allCommands = tombstones
     .map((t) => `# ${displayName(t.resource_name, t.resource_id)} (${t.resource_type})\n${t.exorcism_cli}`)
@@ -40,6 +51,7 @@ export function Exorcism({ report }: Props) {
         {tombstones.map((t) => (
           <div key={t.id} className={`exorcism-card exorcism-card--${t.severity}`}>
             <div className="exorcism-card-header">
+              <CardGhost t={t} />
               <span className="exorcism-name">{displayName(t.resource_name, t.resource_id)}</span>
               <SeverityBadge severity={t.severity} size="sm" />
               {t.estimated_monthly_cost > 0 && (
@@ -52,7 +64,7 @@ export function Exorcism({ report }: Props) {
             <div className="exorcism-block">
               <div className="exorcism-block-header">
                 <span className="exorcism-block-label">AWS CLI</span>
-                <CopyButton text={t.exorcism_cli} label="Copy" />
+                <CopyButton text={t.exorcism_cli} label="Copy" onCopied={() => exorcise(t.resource_id)} />
               </div>
               <pre className="exorcism-code">{t.exorcism_cli}</pre>
               {t.exorcism_cli.includes("--dry-run") && (
@@ -66,7 +78,7 @@ export function Exorcism({ report }: Props) {
               <div className="exorcism-block">
                 <div className="exorcism-block-header">
                   <span className="exorcism-block-label">Terraform</span>
-                  <CopyButton text={t.exorcism_tf} label="Copy" />
+                  <CopyButton text={t.exorcism_tf} label="Copy" onCopied={() => exorcise(t.resource_id)} />
                 </div>
                 <pre className="exorcism-code">{t.exorcism_tf}</pre>
               </div>

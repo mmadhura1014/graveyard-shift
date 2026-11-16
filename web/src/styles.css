@@ -706,3 +706,14 @@ pre { white-space: pre-wrap; word-break: break-word; }
   from { opacity: 0.75; transform: scale(0.9); }
   to   { opacity: 1;    transform: scale(1.1); }
 }
+
+/* ── Exorcism: ghost-vanish ──────────────────────────────────────── */
+.card-ghost { display: inline-block; margin-right: 0.35rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .tombstone--vanishing { animation: ghost-vanish 1.4s ease-in forwards; }
+}
+@keyframes ghost-vanish {
+  0%   { opacity: 1; transform: translateY(0) scale(1); filter: none; }
+  40%  { opacity: 0.8; filter: brightness(1.8) blur(0); }
+  100% { opacity: 0; transform: translateY(-40px) scale(1.15); filter: brightness(2) blur(4px); }
+}

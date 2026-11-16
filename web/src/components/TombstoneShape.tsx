@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useVanishing } from "../hooks/useVanishing";
 import type { Tombstone } from "../types/report";
 import { SeverityBadge } from "./SeverityBadge";
 import { displayName } from "../utils/escape";
@@ -29,6 +30,7 @@ function shortType(resourceType: string): string {
 
 export function TombstoneShape({ tombstone: t, maxCost, onOpen, floating = false }: Props) {
   const [hovered, setHovered] = useState(false);
+  const vanishing = useVanishing(t.resource_id);
 
   const fraction = maxCost > 0 ? Math.min(t.estimated_monthly_cost / maxCost, 1) : 0;
   const height = MIN_HEIGHT + fraction * (MAX_HEIGHT - MIN_HEIGHT);
@@ -39,7 +41,7 @@ export function TombstoneShape({ tombstone: t, maxCost, onOpen, floating = false
 
   return (
     <div
-      className={`tombstone tombstone--${t.severity}`}
+      className={`tombstone tombstone--${t.severity}${vanishing ? " tombstone--vanishing" : ""}`}
       style={{ width, height, position: "relative" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
