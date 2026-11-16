@@ -7,6 +7,8 @@ import { formatCostShort } from "../utils/cost";
 interface Props {
   tombstone: Tombstone;
   maxCost: number;
+  /** Called when the stone is activated (click, Enter or Space). */
+  onOpen?: (el: HTMLElement) => void;
 }
 
 const MIN_HEIGHT = 140;
@@ -23,7 +25,7 @@ function shortType(resourceType: string): string {
   return part.length > 12 ? `${part.slice(0, 11)}…` : part;
 }
 
-export function TombstoneShape({ tombstone: t, maxCost }: Props) {
+export function TombstoneShape({ tombstone: t, maxCost, onOpen }: Props) {
   const [hovered, setHovered] = useState(false);
 
   const fraction = maxCost > 0 ? Math.min(t.estimated_monthly_cost / maxCost, 1) : 0;
@@ -42,7 +44,14 @@ export function TombstoneShape({ tombstone: t, maxCost }: Props) {
       onFocus={() => setHovered(true)}
       onBlur={() => setHovered(false)}
       tabIndex={0}
-      role="article"
+      role="button"
+      onClick={(e) => onOpen?.(e.currentTarget)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen?.(e.currentTarget);
+        }
+      }}
       aria-label={`${name}, ${t.resource_type}, ${t.cause}, ${formatCostShort(t.estimated_monthly_cost)}`}
     >
       {/* SVG tombstone shape */}

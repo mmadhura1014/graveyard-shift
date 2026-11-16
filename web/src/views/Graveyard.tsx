@@ -1,5 +1,8 @@
+import { useState } from "react";
 import type { Report } from "../types/report";
 import { TombstoneShape } from "../components/TombstoneShape";
+import { SeancePanel } from "../components/SeancePanel";
+import type { Tombstone } from "../types/report";
 
 interface Props {
   report: Report;
@@ -7,6 +10,7 @@ interface Props {
 
 export function Graveyard({ report }: Props) {
   // Most expensive ghosts stand first (top-left), sorted without mutating the report.
+  const [selected, setSelected] = useState<{ t: Tombstone; el: HTMLElement | null } | null>(null);
   const tombstones = [...report.tombstones].sort(
     (a, b) => b.estimated_monthly_cost - a.estimated_monthly_cost,
   );
@@ -38,10 +42,18 @@ export function Graveyard({ report }: Props) {
       <div className="tombstone-field" role="list" aria-label={`${tombstones.length} zombie resources`}>
         {tombstones.map((t) => (
           <div key={t.id} role="listitem">
-            <TombstoneShape tombstone={t} maxCost={maxCost} />
+            <TombstoneShape tombstone={t} maxCost={maxCost} onOpen={(el) => setSelected({ t, el })} />
           </div>
         ))}
       </div>
+
+      {selected && (
+        <SeancePanel
+          tombstone={selected.t}
+          triggerEl={selected.el}
+          onClose={() => setSelected(null)}
+        />
+      )}
 
       {/* Ground line */}
       <div className="graveyard-ground" aria-hidden="true" />
